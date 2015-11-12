@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>SNR DESIGN</title>
+    <link rel="shortcut icon" href="https://cdn1.iconfinder.com/data/icons/dental-2-1/90/89-128.png" type="image/x-icon" />
+	<link rel="text/javascript" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+	<!-- bootstrap theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/priority.css" rel="stylesheet" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/visual.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div class="col-sm-6 col-sm-offset-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>Medical Questionaire</h2>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" method="post" action="/testing.php" >
+                <div class="form-group">
+                    <label for="basic[age]" class="col-sm-4 control-label">Age</label>
+                    <div class="col-sm-7 form-left-align">
+                        <select name="basic[age]">
+                            <option value=""></option>
+                            <option value="65">65-70</option>
+                            <option value="70">70-75</option>
+                            <option value="75">75-80</option>
+                            <option value="80">80-85</option>
+                            <option value="85">85+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="col-sm-4 control-label">Gender:</label>
+                    <div class="col-sm-7 form-left-align">
+                        <input id="female" type="radio" name="basic[gender]" value="female">
+                        <label for="option">Female</label><br>
+                        <input id="female" type="radio" name="basic[gender]" value="male">
+                        <label for="option">Male</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tobacco" class="col-sm-4 control-label">Do You Or Have You Used Tobacco:</label>
+                    <div class="col-sm-7 form-left-align">
+                        <input id="tobacco" type="checkbox" name="basic[tobacco]" value="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="race" class="col-sm-4 control-label">Race:</label>
+                    <div class="col-sm-7 form-left-align">
+                        <select name="basic[race]">
+                            <option value=""></option>
+                            <option value="white">White</option>
+                            <option value="black">Black</option>
+                            <option value="asian">Asian</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="prior" class="col-sm-4 control-label">Would you like to enter your previous screening history?</label>
+                    <div class="col-sm-7 form-left-align">
+                        <input id="prior" type="checkbox" name="basic[prior]" value="true">
+                    </div>
+                </div>
+                <div id="prior-medical">
+                    <div class="panel-heading sub-heading">
+                        <h2>Prior Medical Information</h2>
+                    </div>
+                    <div class="form-group">
+                        <label for="prior['disease1']" class="col-sm-4 control-label">Disease 1</label>
+                        <div class="col-sm-7">
+                            <input class="form-control label-no-padding" id="prior['disease1']" type="text" name="prior['disease1']" value="stuff" />
+                        </div>
+                        <label for="feedback-email" class="col-sm-4 control-label">Disease 2</label>
+                        <div class="col-sm-7">
+                            <input class="form-control label-no-padding" id="prior['disease2']" type="text" name="prior['disease2']" value="empty house" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-lg">Submit Answers</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
