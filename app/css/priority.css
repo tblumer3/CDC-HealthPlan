@@ -26,11 +26,24 @@
     display: none;
 }
 
-#prior-follow {
-    display: none;
-}
 .form-group-short {
+    margin-left: -15px;
+    margin-right:-15px;
     margin-bottom: 0px;
     padding-top: 0px;
     padding-bottom: 5px;
+}
+.col-no-margin {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.follow-required {
+    display: inline;
+    color: red;
+    font-weight: bold;
+}
+
+.none-visibility {
+    display: none;
 }

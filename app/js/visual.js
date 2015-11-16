@@ -10,3 +10,7 @@ function show_sub(event) {
     }
     return true;
 }
+
+function check_required(event) {
+    
+}
