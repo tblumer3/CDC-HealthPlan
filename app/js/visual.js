@@ -11,6 +11,22 @@ function show_sub(event) {
     return true;
 }
 
+function show_sub_screenings(event) {
+    var div_id = event.target.id;
+    var value = $('#'+div_id).prop('checked');
+    var follow_div_id = div_id + "-follow";
+    var follow_2_div_id = div_id + "-follow-result";
+
+    if (value) {
+        $('#'+follow_div_id).show();
+        $('#'+follow_2_div_id).show();
+    } else {
+        $('#'+follow_div_id).hide();
+        $('#'+follow_2_div_id).hide();
+    }
+    return true;
+}
+
 // Goes through each required question, checks if it is a valid input and shows required flags accordingly
 function check_required() {
     // First reset the form's required notifications

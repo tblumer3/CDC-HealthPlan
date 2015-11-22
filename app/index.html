@@ -247,31 +247,31 @@
                     <!-- Past Diagnosis -->
                     <div class="form-group">
                         <label for="prior_condition" class="col-sm-8 col-sm-offset-1 control-label sub-label">Please Check If You Have The Following:</label><br>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="diabetes" type="checkbox" name="prior[diabetes]" value="true"> Diabetes
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="high_blood_pressure" type="checkbox" name="prior[high_blood_pressure]" value="true"> High Blood Pressure
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="heart_attack" type="checkbox" name="prior[heart_attack]" value="true"> Heart Attack
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="hepatitis" type="checkbox" name="prior[hepatitis]" value="true"> Hepatitis
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="stroke" type="checkbox" name="prior[stroke]" value="true"> Stroke
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="depression" type="checkbox" name="prior[depression]" value="true"> Depression
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="coronary_artery_disease" type="checkbox" name="prior[coronary_artery_disease]" value="true"> Coronary Artery Disease
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="congestive_heart_failure" type="checkbox" name="prior[congestive_heart_failure]" value="true"> Congestive Heart Failure
                         </div>
-                        <div class="col-sm-10 col-sm-offset-2 form-left-align">
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="other" type="checkbox" name="prior[other]" value="true"> Other
                         </div>
                     </div>
@@ -279,12 +279,12 @@
                     <div class="form-group">
                         <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check If You Have Had The Following:</label></br>
                         <div class="col-sm-12 col-no-margin">
-                            <div class="col-sm-3 col-sm-offset-2 form-left-align">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
                                 <input id="tdap" type="checkbox" name="immunization[tdap]" value="true" onchange="show_sub(event)"> Tdap
                             </div>
                             <div id="tdap-follow" class="immunization-follow">
                                 <div class="col-sm-6 form-left-align">
-                                    How Many Years Ago:
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
                                     <select name="immunization[tdap_years]">
                                         <option value=""></option>
                                         <option value="1">1</option>
@@ -298,12 +298,12 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-no-margin">
-                            <div class="col-sm-3 col-sm-offset-2 form-left-align">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
                                 <input id="flu" type="checkbox" name="immunization[flu]" value="true" onchange="show_sub(event)"> Influenza
                             </div>
                             <div id="flu-follow" class="immunization-follow">
                                 <div class="col-sm-6 form-left-align">
-                                    How Many Years Ago:
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
                                     <select name="immunization[flu_years]">
                                         <option value=""></option>
                                         <option value="1">1</option>
@@ -317,12 +317,12 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-no-margin">
-                            <div class="col-sm-3 col-sm-offset-2 form-left-align">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
                                 <input id="pneumococcal" type="checkbox" name="immunization[pneumococcal]" value="true" onchange="show_sub(event)"> Pneumococcal
                             </div>
                             <div id="pneumococcal-follow" class="immunization-follow">
                                 <div class="col-sm-6 form-left-align">
-                                    How Many Years Ago:
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
                                     <select name="immunization[pneumococcal_years]">
                                         <option value=""></option>
                                         <option value="1">1</option>
@@ -336,7 +336,246 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Previous Screenings -->
+                    <div class="form-group">
+                        <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check All Previous Screenings:</label></br>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
+                                <input id="cholesterol_screening" type="checkbox" name="screening[cholesterol]" value="true" onchange="show_sub_screenings(event)"> Cholesterol
+                            </div>
+                            <div id="cholesterol_screening-follow-result" class="screening-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    <div class="form-left-align">
+                                        <label for="cholesterol_screening-result">Test Result: </label>
+                                        <input id="cholesterol_screening-yes" type="radio" name="basic[cholesterol_screening]" value="true"> Positive 
+                                        <input id="cholesterol_screening-no" type="radio" name="basic[cholesterol_screening]" value="false"> Negative 
+                                    </div>
+                                </div>
+                            </div>  
+                            <div id="cholesterol_screening-follow" class="screening-follow">
+                                <div class="col-sm-offset-6 col-sm-6 form-left-align">
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
+                                    <select name="screening[cholesterol_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="10">5-10</option>
+                                        <option value="20">10+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
+                                <input id="mammogram_screening" type="checkbox" name="screening[mammogram]" value="true" onchange="show_sub_screenings(event)"> Mammogram
+                            </div>
+                            <div id="mammogram_screening-follow-result" class="screening-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    <div class="form-left-align">
+                                        <label for="mammogram_screening-result">Test Result: </label>
+                                        <input id="mammogram_screening-yes" type="radio" name="basic[mammogram_screening]" value="true"> Positive 
+                                        <input id="mammogram_screening-no" type="radio" name="basic[mammogram_screening]" value="false"> Negative 
+                                    </div>
+                                </div>
+                            </div>                            
+                            <div id="mammogram_screening-follow" class="screening-follow">
+                                <div class="col-sm-offset-6 col-sm-6 form-left-align">
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
+                                    <select name="screening[mammogram_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="10">5-10</option>
+                                        <option value="20">10+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
+                                <input id="blood_in_stool_screening" type="checkbox" name="screening[blood_in_stool]" value="true" onchange="show_sub_screenings(event)"> Fecal Occult Blood Test
+                            </div>
+                            <div id="blood_in_stool_screening-follow-result" class="screening-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    <div class="form-left-align">
+                                        <label for="blood_in_stool_screening-result">Test Result: </label>
+                                        <input id="blood_in_stool_screening-yes" type="radio" name="basic[blood_in_stool_screening]" value="true"> Positive 
+                                        <input id="blood_in_stool_screening-no" type="radio" name="basic[blood_in_stool_screening]" value="false"> Negative 
+                                    </div>
+                                </div>
+                            </div>  
+                            <div id="blood_in_stool_screening-follow" class="screening-follow">
+                                <div class="col-sm-offset-6 col-sm-6 form-left-align">
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
+                                    <select name="screening[blood_in_stool_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="10">5-10</option>
+                                        <option value="20">10+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
+                                <input id="hiv_screening" type="checkbox" name="screening[hiv]" value="true" onchange="show_sub_screenings(event)"> HIV/AIDS
+                            </div>
+                            <div id="hiv_screening-follow-result" class="screening-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    <div class="form-left-align">
+                                        <label for="hiv_screening-result">Test Result: </label>
+                                        <input id="hiv_screening-yes" type="radio" name="basic[hiv_screening]" value="true"> Positive 
+                                        <input id="hiv_screening-no" type="radio" name="basic[hiv_screening]" value="false"> Negative 
+                                    </div>
+                                </div>
+                            </div>  
+                            <div id="hiv_screening-follow" class="screening-follow">
+                                <div class="col-sm-offset-6 col-sm-6 form-left-align">
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
+                                    <select name="screening[hiv_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="10">5-10</option>
+                                        <option value="20">10+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
+                                <input id="colonoscopy_screening" type="checkbox" name="screening[colonoscopy]" value="true" onchange="show_sub_screenings(event)"> Colonoscopy
+                            </div>
+                            <div id="colonoscopy_screening-follow-result" class="screening-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    <div class="form-left-align">
+                                        <label for="colonoscopy_screening-result">Test Result: </label>
+                                        <input id="colonoscopy_screening-yes" type="radio" name="basic[colonoscopy_screening]" value="true"> Positive 
+                                        <input id="colonoscopy_screening-no" type="radio" name="basic[colonoscopy_screening]" value="false"> Negative 
+                                    </div>
+                                </div>
+                            </div>  
+                            <div id="colonoscopy_screening-follow" class="screening-follow">
+                                <div class="col-sm-offset-6 col-sm-6 form-left-align">
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
+                                    <select name="screening[colonoscopy_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="10">5-10</option>
+                                        <option value="20">10+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
+                                <input id="diabetes_screening" type="checkbox" name="screening[diabetes_screening]" value="true" onchange="show_sub_screenings(event)"> Diabetes
+                            </div>
+                            <div id="diabetes_screening-follow-result" class="screening-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    <div class="form-left-align">
+                                        <label for="diabetes-result">Test Result: </label>
+                                        <input id="diabetes-yes" type="radio" name="basic[diabetes]" value="true"> Positive 
+                                        <input id="diabetes-no" type="radio" name="basic[diabetes]" value="false"> Negative 
+                                    </div>
+                                </div>
+                            </div>                           
+                            <div id="diabetes_screening-follow" class="screening-follow">
+                                <div class="col-sm-offset-6 col-sm-6 form-left-align">
+                                    <label for="diabetes-result">How Many Years Ago:</label>
+                                    <select name="screening[diabetes_screening_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="10">5-10</option>
+                                        <option value="20">10+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
+                                <input id="abdominal_aortic_aneurysm_screening" type="checkbox" name="screening[abdominal_aortic_aneurysm]" value="true" onchange="show_sub_screenings(event)"> Abdominal Aortic Aneurysm (AAA)
+                            </div>
+                            <div id="abdominal_aortic_aneurysm_screening-follow-result" class="screening-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    <div class="form-left-align">
+                                        <label for="abdominal_aortic_aneurysm_screening-result">Test Result: </label>
+                                        <input id="abdominal_aortic_aneurysm_screening-yes" type="radio" name="basic[abdominal_aortic_aneurysm_screening]" value="true"> Positive 
+                                        <input id="abdominal_aortic_aneurysm_screening-no" type="radio" name="basic[abdominal_aortic_aneurysm_screening]" value="false"> Negative 
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="abdominal_aortic_aneurysm_screening-follow" class="screening-follow">
+                                <div class="col-sm-offset-6 col-sm-6 form-left-align">
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
+                                    <select name="screening[abdominal_aortic_aneurysm_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="10">5-10</option>
+                                        <option value="20">10+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-4 col-sm-offset-2 form-left-align">
+                                <input id="hepatitis_c_screening" type="checkbox" name="screening[hepatitis_c]" value="true" onchange="show_sub_screenings(event)"> Hepatitis C
+                            </div>
+                            <div id="hepatitis_c_screening-follow-result" class="screening-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    <div class="form-left-align">
+                                        <label for="hepatitis_c_screening-result">Test Result: </label>
+                                        <input id="hepatitis_c_screening-yes" type="radio" name="basic[hepatitis_c_screening]" value="true"> Positive 
+                                        <input id="hepatitis_c_screening-no" type="radio" name="basic[hepatitis_c_screening]" value="false"> Negative 
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="hepatitis_c_screening-follow" class="screening-follow">
+                                <div class="col-sm-offset-6 col-sm-6 form-left-align">
+                                    <label for="cholesterol_screening-result">How Many Years Ago:</label>
+                                    <select name="screening[hepatitis_c_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="10">5-10</option>
+                                        <option value="20">10+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
+
                 <!-- final_required -->
                 <div class="form-group form-group-short" id="final_required">
                         <label for="final_required" class="col-sm-offset-3 col-sm-6 control-label"><span class="required2">Asterisk (*) Indicates a Required Field</span></label>

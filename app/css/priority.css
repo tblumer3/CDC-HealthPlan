@@ -22,10 +22,6 @@
     text-align: left !important;
 }
 
-.immunization-follow {
-    display: none;
-}
-
 .form-group-short {
     margin-left: -15px;
     margin-right:-15px;
@@ -41,6 +37,11 @@
 .col-no-margin {
     padding-left: 0px;
     padding-right: 0px;
+    padding-bottom: 5px;
+}
+
+.past-diag {
+    padding-bottom: 5px;
 }
 
 .required2 {
@@ -54,11 +55,7 @@
     font-weight: bold;
 }
 
-#prior-follow {
-    display: none;
-}
-
-.tobacco_yes_follow, .tobacco_no_follow, .tobacco_used_follow, .alcohol_follow, #final_required, #height_number, #weight_number{
+#prior-follow, .immunization-follow, .screening-follow, .tobacco_yes_follow, .tobacco_no_follow, .tobacco_used_follow, .alcohol_follow, #final_required, #height_number, #weight_number{
     display: none;
 }
 
