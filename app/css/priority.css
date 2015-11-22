@@ -33,17 +33,45 @@
     padding-top: 0px;
     padding-bottom: 5px;
 }
+
+.form-group-last {
+    padding-top: 0px;
+}
+
 .col-no-margin {
     padding-left: 0px;
     padding-right: 0px;
 }
 
-.follow-required {
-    display: inline;
+.required2 {
     color: red;
     font-weight: bold;
 }
 
-.none-visibility {
+.asterisk {
     display: none;
+    color: red;
+    font-weight: bold;
+}
+
+#prior-follow {
+    display: none;
+}
+
+.tobacco_yes_follow, .tobacco_no_follow, .tobacco_used_follow, .alcohol_follow, #final_required, #height_number, #weight_number{
+    display: none;
+}
+
+.sub-panel-layer {
+    background-color: #bfbfbf;
+}
+
+#final_required > .control-label {
+    text-align: center;
+}
+
+#height_number, #weight_number {
+    color: red;
+    font-weight: bold;
+    text-align: left;
 }

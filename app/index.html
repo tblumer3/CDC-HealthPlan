@@ -17,14 +17,15 @@
 <div class="col-sm-6 col-sm-offset-3">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2>Medical Questionaire</h2>
+            <h2>Basic Information</h2>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form" method="post" action="/testing.php" >
+            <form class="form-horizontal" role="form" method="post" action="/testing.php" onsubmit="return check_required()">
+                <!-- Age -->
                 <div class="form-group">
-                    <label for="basic[age]" class="col-sm-4 control-label">Age:</label>
+                    <label for="basic[age]" class="col-sm-4 control-label"><span id="age_required"><span class="asterisk">*</span>Age:</span></label>
                     <div class="col-sm-7 form-left-align">
-                        <select id="age" class="required" name="basic[age]">
+                        <select id="age" name="basic[age]">
                             <option value=""></option>
                             <option value="65">65-70</option>
                             <option value="70">70-75</option>
@@ -34,28 +35,180 @@
                         </select>
                     </div>
                 </div>
+                <!-- Gender -->
                 <div class="form-group">
-                    <label for="gender" class="col-sm-4 control-label">Gender:</label>
+                    <label for="gender" class="col-sm-4 control-label"><span id="gender_required"><span class="asterisk">*</span>Gender:</span></label>
                     <div class="col-sm-7 form-left-align">
-                        <input id="female" class="required" type="radio" name="basic[gender]" value="female">
-                        <label for="option">Female</label><br>
-                        <input id="male" class="required" type="radio" name="basic[gender]" value="male">
-                        <label for="option">Male</label>
+                        <input id="female" type="radio" name="basic[gender]" value="female">
+                        <label for="female">Female</label>
+                        <br>
+                        <input id="male" type="radio" name="basic[gender]" value="male">
+                        <label for="male">Male</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <!-- TBD - give tobacco dropdown -->
+                <!-- Height and Weight -->
+                <div class="form-group form-group-short">
+                    <label for="height" class="col-sm-4 control-label"><span id="height_required"><span class="asterisk">*</span>Height (in inches):</span></label>
+                    <div class="col-sm-3 form-left-align">
+                        <input id="height" type="text" name="basic[height]" value="">
+                    </div>
+                    <div id="height_number" class="col-sm-4">
+                        *Must be a Number
+                    </div>
 
-                    <label for="tobacco" class="col-sm-4 control-label">Do You Or Have You Smoked Tobacco Regularly:</label>
-                    <div class="col-sm-7 form-left-align">
-                        <input id="tobacco" class="required" type="checkbox" name="basic[tobacco]" value="true">
-                        <div id="tobacco-required" class="follow-required none-visibility">Required</div>
+                </div>
+                <div class="form-group form-group-last">
+                    <label for="weight" class="col-sm-4 control-label"><span id="weight_required"><span class="asterisk">*</span>Weight (in pounds):</span></label>
+                    <div class="col-sm-3 form-left-align">
+                        <input id="weight" type="text" name="basic[weight]" value="">
+                    </div>
+                    <div id="weight_number" class="col-sm-4">
+                        *Must be a Number
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="race" class="col-sm-4 control-label">Race:</label>
+                <!-- Tobacco -->
+                <div class="form-group form-group-short">
+                    <label for="tobacco" class="col-sm-4 control-label"><span id="tobacco_required"><span class="asterisk">*</span>Do You Currently Smoke Tobacco:</span></label>
                     <div class="col-sm-7 form-left-align">
-                        <select class="required" name="basic[race]"><div>Required</div>
+                        <input id="tobacco_yes" type="radio" name="basic_tobacco_now" value="true">
+                        <label for="tobacco_yes">Yes</label>
+                        <br>
+                        <input id="tobacco_no" type="radio" name="basic_tobacco_now" value="false">
+                        <label for="tobacco_no">No</label>
+                    </div>
+                </div>
+                <div class="sub-panel-layer col-sm-offset-2">
+                    <!-- Tobacco - current smoker -->
+                    <div class="form-group tobacco_yes_follow form-group-short">
+                        <label for="tobacco_yes_packs" class="col-sm-4 control-label"><span id="tobacco_yes_packs_required"><span class="asterisk">*</span>How Many Packs Per Day:</span></label>
+                        <div class="col-sm-7 form-left-align">
+                            <select id="tobacco_yes_packs" name="basic[tobacco_now][packs]">
+                                <option value=""></option>
+                                <option value="0.25">1/4</option>
+                                <option value="0.5">1/2</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group tobacco_yes_follow form-group-last">
+                        <label for="tobacco_yes_years" class="col-sm-4 control-label"><span id="tobacco_yes_years_required"><span class="asterisk">*</span>How Long Since You Last Smoked:</span></label>
+                        <div class="col-sm-7 form-left-align">
+                            <select id="tobacco_yes_years" name="basic[tobacco_now][years]">
+                                <option value=""></option>
+                                <option value="5">0-5</option>
+                                <option value="10">5-10</option>
+                                <option value="15">10-15</option>
+                                <option value="20">15-20</option>
+                                <option value="30">20-30</option>
+                                <option value="40">30+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Tobacco - not currently smoking -->
+                    <div id="last_and_first" class="form-group tobacco_no_follow form-group-last">
+                        <label for="tobacco" class="col-sm-4 control-label"><span id="tobacco_no_required"><span class="asterisk">*</span>Have You Smoked Tobacco in the Past:</span></label>
+                        <div class="col-sm-7 form-left-align">
+                            <input id="tobacco_old_yes" type="radio" name="basic_tobacco_then" value="true">
+                            <label for="option">Yes</label>
+                            <br>
+                            <input id="tobacco_old_no" type="radio" name="basic_tobacco_then" value="false">
+                            <label for="option">No</label>
+                        </div>
+                    </div>
+
+                    <!-- Tobacco used to smoke -->
+                    <div class="form-group tobacco_used_follow form-group-short">
+                        <label for="tobacco_no_quit_years" class="col-sm-4 control-label"><span id="tobacco_no_quit_years_required"><span class="asterisk">*</span>For How Many Years:</span></label>
+                        <div class="col-sm-7 form-left-align">
+                            <select id="tobacco_no_quit_years" name="basic[tobacco_used][quit_years]">
+                                <option value=""></option>
+                                <option value="5">0-5</option>
+                                <option value="10">5-10</option>
+                                <option value="15">10-15</option>
+                                <option value="20">15-20</option>
+                                <option value="30">20-30</option>
+                                <option value="40">30+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group tobacco_used_follow form-group-short">
+                        <label for="tobacco_no_quit_packs" class="col-sm-4 control-label"><span id="tobacco_no_quit_packs_required"><span class="asterisk">*</span>How Many Packs Per Day:</span></label>
+                        <div class="col-sm-7 form-left-align">
+                            <select id="tobacco_no_quit_packs" name="basic[tobacco_used][packs]">
+                                <option value=""></option>
+                                <option value="0.25">1/4</option>
+                                <option value="0.5">1/2</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group tobacco_used_follow form-group-last">
+                        <label for="tobacco_no_quit_years_smoked" class="col-sm-4 control-label"><span id="tobacco_no_quit_years_smoked_required"><span class="asterisk">*</span>For How Many Years:</span></label>
+                        <div class="col-sm-7 form-left-align">
+                            <select id="tobacco_no_quit_years_smoked" name="basic[tobacco_used][years]">
+                                <option value=""></option>
+                                <option value="5">0-5</option>
+                                <option value="10">5-10</option>
+                                <option value="15">10-15</option>
+                                <option value="20">15-20</option>
+                                <option value="30">20-30</option>
+                                <option value="40">30+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of tobacco section -->
+
+                <!-- start of alcohol section -->
+                <div class="form-group form-group-short">
+                    <label for="alcohol" class="col-sm-4 control-label"><span ID="alcohol_required"><span class="asterisk">*</span>Do You Drink Alcohol:</span></label>
+                    <div class="col-sm-7 form-left-align">
+                        <input id="alcohol_yes" type="radio" name="basic_alcohol" value="true">
+                        <label for="alcohol_yes">Yes</label>
+                        <br>
+                        <input id="alcohol_no" type="radio" name="basic_alcohol" value="false">
+                        <label for="alcohol_no">No</label>
+                    </div>
+                </div>
+                <div class="sub-panel-layer col-sm-offset-2">
+                    <div class="form-group alcohol_follow form-group-last">
+                        <label for="alcohol-drinks" class="col-sm-4 control-label"><span id="alcohol_yes_drinks_required"><span class="asterisk">*</span>How Many Days Per Week Do You Drink:</span></label>
+                        <div class="col-sm-7 form-left-align">
+                            <select id="alcohol_yes_drinks" name="basic[alcohol][drinks]">
+                                <option value=""></option>
+                                <option value="5">0-5</option>
+                                <option value="10">5-10</option>
+                                <option value="15">10-15</option>
+                                <option value="20">15-20</option>
+                                <option value="30">20-30</option>
+                                <option value="40">30+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Alcohol Section -->
+
+                <!-- Intervaneous Drugs -->
+                <div class="form-group">
+                    <label for="drugs" class="col-sm-4 control-label"><span id="drugs_required"><span class="asterisk">*</span>Do You or Have You Ever Used Intravenous Drugs:</span></label>
+                    <div class="col-sm-7 form-left-align">
+                        <input id="drugs-yes" type="radio" name="basic[drugs]" value="true">
+                        <label for="drugs-yes">Yes</label>
+                        <br>
+                        <input id="drugs-no" type="radio" name="basic[drugs]" value="false">
+                        <label for="drugs-no">No</label>
+                    </div>
+                </div>
+
+                <!-- Race -->
+                <div class="form-group">
+                    <label for="race" class="col-sm-4 control-label"><span id="race_required"><span class="asterisk">*</span>Race:</span></label>
+                    <div class="col-sm-7 form-left-align">
+                        <select id="race" name="basic[race]">
                             <option value=""></option>
                             <option value="white">White</option>
                             <option value="black">Black</option>
@@ -63,14 +216,13 @@
                             <option value="hispanic">Hispanic</option>
                             <option value="other">Other</option>
                         </select>
-                        <div class="follow-required none-visibility">Required</div>
-
                     </div>
                 </div>
+                <!-- Number of Screenings -->
                 <div class="form-group">
-                    <label for="basic[n]" class="col-sm-4 control-label">How Many Screening/Tests Would You Like To Take Over The Next 5 Years:</label>
+                    <label for="basic[n]" class="col-sm-4 control-label"><span id="n_required"><span class="asterisk">*</span>How Many Screening/Tests Would You Like To Receive Over The Next 5 Years:</span></label>
                     <div class="col-sm-7 form-left-align">
-                        <select class="required" name="basic[n]">
+                        <select id="n" name="basic[n]">
                             <option value=""></option>
                             <option value="5">5</option>
                             <option value="10">10</option>
@@ -81,7 +233,7 @@
                         </select>
                     </div>
                 </div>
-
+                <!-- Prior Medical History, Yes or No -->
                 <div class="form-group">
                     <label for="prior" class="col-sm-4 control-label">Would You Like To Enter Your Previous Screening History:</label>
                     <div class="col-sm-7 form-left-align">
@@ -92,8 +244,7 @@
                     <div class="panel-heading sub-heading">
                         <h2>Prior Medical Information</h2>
                     </div>
-
-
+                    <!-- Past Diagnosis -->
                     <div class="form-group">
                         <label for="prior_condition" class="col-sm-8 col-sm-offset-1 control-label sub-label">Please Check If You Have The Following:</label><br>
                         <div class="col-sm-10 col-sm-offset-2 form-left-align">
@@ -124,93 +275,71 @@
                             <input id="other" type="checkbox" name="prior[other]" value="true"> Other
                         </div>
                     </div>
+                    <!-- Immunizations -->
                     <div class="form-group">
-                    <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check If You Have The Following:</label></br>
-                    <div class="col-sm-12 col-no-margin">
-                        <div class="col-sm-3 col-sm-offset-2 form-left-align">
-                            <input id="tdap" type="checkbox" name="immunization[tdap]" value="true" onchange="show_sub(event)"> Tdap
+                        <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check If You Have Had The Following:</label></br>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-3 col-sm-offset-2 form-left-align">
+                                <input id="tdap" type="checkbox" name="immunization[tdap]" value="true" onchange="show_sub(event)"> Tdap
+                            </div>
+                            <div id="tdap-follow" class="immunization-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    How Many Years Ago:
+                                    <select name="immunization[tdap_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="other">5+</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div id="tdap-follow" class="immunization-follow">
-                            <div class="col-sm-6 form-left-align">
-                                How Many Years Ago:
-                                <select name="immunization[tdap_years]">
-                                    <!-- TBD - number of years ago to offer for each -->
-                                    <option value=""></option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="other">5+</option>
-                                </select>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-3 col-sm-offset-2 form-left-align">
+                                <input id="flu" type="checkbox" name="immunization[flu]" value="true" onchange="show_sub(event)"> Influenza
+                            </div>
+                            <div id="flu-follow" class="immunization-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    How Many Years Ago:
+                                    <select name="immunization[flu_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="other">5+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-no-margin">
+                            <div class="col-sm-3 col-sm-offset-2 form-left-align">
+                                <input id="pneumococcal" type="checkbox" name="immunization[pneumococcal]" value="true" onchange="show_sub(event)"> Pneumococcal
+                            </div>
+                            <div id="pneumococcal-follow" class="immunization-follow">
+                                <div class="col-sm-6 form-left-align">
+                                    How Many Years Ago:
+                                    <select name="immunization[pneumococcal_years]">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="other">5+</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-no-margin">
-                        <div class="col-sm-3 col-sm-offset-2 form-left-align">
-                            <input id="flu" type="checkbox" name="immunization[flu]" value="true" onchange="show_sub(event)"> Influenza
-                        </div>
-                        <div id="flu-follow" class="immunization-follow">
-                            <div class="col-sm-6 form-left-align">
-                                How Many Years Ago:
-                                <select name="immunization[flu_years]">
-                                    <!-- TBD - number of years ago to offer for each -->
-                                    <option value=""></option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="other">5+</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-no-margin">
-                        <div class="col-sm-3 col-sm-offset-2 form-left-align">
-                            <input id="pneumococcal" type="checkbox" name="immunization[pneumococcal]" value="true" onchange="show_sub(event)"> Pneumococcal
-                        </div>
-                        <div id="pneumococcal-follow" class="immunization-follow">
-                            <div class="col-sm-6 form-left-align">
-                                How Many Years Ago:
-                                <select name="immunization[pneumococcal_years]">
-                                    <!-- TBD - number of years ago to offer for each -->
-                                    <option value=""></option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="other">5+</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-no-margin">
-                        <div class="col-sm-3 col-sm-offset-2 form-left-align">
-                            <input id="hepatitis_b" type="checkbox" name="immunization[hepatitis_b]" value="true" onchange="show_sub(event)"> Hepatitis B
-                        </div>
-                        <div id="hepatitis_b-follow" class="immunization-follow">
-                            <div class="col-sm-6 form-left-align">
-                                How Many Years Ago:
-                                <select name="immunization[hepatitis_b_years]">
-                                    <!-- TBD - number of years ago to offer for each -->
-                                    <option value=""></option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="other">5+</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="alcohol_tobacco" class="col-sm-8 col-sm-offset-1 control-label sub-label">Alcohol & Tobacco</label><br>
-
-                    </div>
+                </div>
+                <!-- final_required -->
+                <div class="form-group form-group-short" id="final_required">
+                        <label for="final_required" class="col-sm-offset-3 col-sm-6 control-label"><span class="required2">Asterisk (*) Indicates a Required Field</span></label>
                 </div>
                 <div class="form-group">
                     <div>
