@@ -1,5 +1,5 @@
 .panel-default>.health-alert {
-  background-color: #feff1a;
+  background-color: #ff5453;
   border-color: black;
 }
 
@@ -46,6 +46,10 @@
 
 .required2 {
     color: red;
+    font-weight: bold;
+}
+
+.condition_name {
     font-weight: bold;
 }
 

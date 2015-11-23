@@ -124,6 +124,9 @@ function check_required() {
         $("#final_required").show();
     }
 
+// for testing
+success = true;
+
     return success;
 }
 

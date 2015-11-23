@@ -1,49 +1,15 @@
 <?php
 
-
-function convert_array($screenings, $results) {
-    $final_output = [];
-    $final_output[0] = ["Screening Name", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5"];
-    foreach ($screenings as $index => $screening_name) {
-        $row = [$screening_name];
-        foreach ($results as $res_index => $binary) {
-            if ($res_index%sizeof($screenings) == $index) {
-                $row[]=$binary;
-            }
-        }
-        $final_output[]= $row;
-    }
-    return $final_output;
-}
-
-function final_value($val_array, $results) {
-
-}
-
-//Testing
-$screenings = ["AAA", "Cancer", "Cancer2", "Annoying Treatment"];
-
-$costs_array_payer = [90000, 980, 15000, 1000000];
-$costs_array_patient = [1.02, .08, .25, .09]; 
-
-$results_patient = [0,1,1,0,1,1,0,0,0,1,1,0,0,1,0,1,0,1,1,0];
-$results_payer = [1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,1,0,1,0];
-
-// includes treatment name as first entry in each row
-$table_patient = convert_array($screenings, $results_patient);
-$table_payer = convert_array($screenings, $results_payer);
-
-$final_value_patient = 2.4;
-$final_value_payer = 25000;
-
-//Mock risk_factor and risk
-$condition = "Osteoporosis";
-$increased_risk = 40;
-$impactful_sub_pops = ["female", "white"];
-$graph_image_name = "ost.jpeg";
-
-$risk = ['condition' => $condition, 'increased_risk' => $increased_risk, 'sub_pops' => $impactful_sub_pops, 'graph' => $graph_image_name];
-$risk_factors = [$risk];
+// $table_patient
+$table_patient = $_REQUEST['patient_table'];
+// $table_payer
+$table_payer = $_REQUEST['payer_table'];
+// $final_value_patient 
+$final_value_patient = $_REQUEST['final_value_patient'];
+// $final_value_payer
+$final_value_payer = $_REQUEST['final_value_payer'];
+// $risk_factors
+$risk_factors = $_REQUEST['risk_factors'];
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -159,8 +125,8 @@ $risk_factors = [$risk];
             </div>
             <div class="panel-body">
                 <div class="col-sm-6 results-text">
-                    You are at <?= $risk['increased_risk']?>% increased risk for <?= $risk['condition'] ?><br>
-                    Contributing risk factors include: 
+                    You are at increased risk for <span class="condition_name"><?= $risk['condition'] ?></span><br>
+                    Contributing Risk Factors Include: 
                     <? for ($i=0; $i < sizeof($risk['sub_pops']); $i++) {
                         echo $risk['sub_pops'][$i];
                         if ($i != (sizeof($risk['sub_pops'])-1)) {

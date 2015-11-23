@@ -20,7 +20,7 @@
             <h2>Basic Information</h2>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form" method="post" action="/testing.php" onsubmit="return check_required()">
+            <form class="form-horizontal" role="form" method="post" action="/middle_processing.php" onsubmit="return check_required()">
                 <!-- Age -->
                 <div class="form-group">
                     <label for="basic[age]" class="col-sm-4 control-label"><span id="age_required"><span class="asterisk">*</span>Age:</span></label>
@@ -120,7 +120,7 @@
 
                     <!-- Tobacco used to smoke -->
                     <div class="form-group tobacco_used_follow form-group-short">
-                        <label for="tobacco_no_quit_years" class="col-sm-4 control-label"><span id="tobacco_no_quit_years_required"><span class="asterisk">*</span>For How Many Years:</span></label>
+                        <label for="tobacco_no_quit_years" class="col-sm-4 control-label"><span id="tobacco_no_quit_years_required"><span class="asterisk">*</span>How Many Years Ago Did You Quit:</span></label>
                         <div class="col-sm-7 form-left-align">
                             <select id="tobacco_no_quit_years" name="basic[tobacco_used][quit_years]">
                                 <option value=""></option>
@@ -180,12 +180,10 @@
                         <div class="col-sm-7 form-left-align">
                             <select id="alcohol_yes_drinks" name="basic[alcohol][drinks]">
                                 <option value=""></option>
-                                <option value="5">0-5</option>
-                                <option value="10">5-10</option>
-                                <option value="15">10-15</option>
-                                <option value="20">15-20</option>
-                                <option value="30">20-30</option>
-                                <option value="40">30+</option>
+                                <option value="1">0-1</option>
+                                <option value="3">2-3</option>
+                                <option value="6">4-6</option>
+                                <option value="7">Daily</option>
                             </select>
                         </div>
                     </div>
