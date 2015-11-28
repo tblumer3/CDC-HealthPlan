@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>SNR DESIGN</title>
+    <title>MyPlan</title>
     <link rel="shortcut icon" href="https://cdn1.iconfinder.com/data/icons/dental-2-1/90/89-128.png" type="image/x-icon" />
 	<link rel="text/javascript" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
 	<!-- bootstrap theme -->
@@ -244,12 +244,15 @@
                     </div>
                     <!-- Past Diagnosis -->
                     <div class="form-group">
-                        <label for="prior_condition" class="col-sm-8 col-sm-offset-1 control-label sub-label">Please Check If You Have The Following:</label><br>
+                        <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check If You Have Been Diagnosed With The Following:</label><br>
                         <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="diabetes" type="checkbox" name="prior[diabetes]" value="true"> Diabetes
                         </div>
                         <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="high_blood_pressure" type="checkbox" name="prior[high_blood_pressure]" value="true"> High Blood Pressure
+                        </div>
+                        <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
+                            <input id="high_cholesterol" type="checkbox" name="prior[high_cholesterol]" value="true"> High Cholesterol
                         </div>
                         <div class="col-sm-10 past-diag col-sm-offset-2 form-left-align">
                             <input id="heart_attack" type="checkbox" name="prior[heart_attack]" value="true"> Heart Attack
@@ -275,7 +278,7 @@
                     </div>
                     <!-- Immunizations -->
                     <div class="form-group">
-                        <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check If You Have Had The Following:</label></br>
+                        <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check If You Have Had The Following Immunizations:</label></br>
                         <div class="col-sm-12 col-no-margin">
                             <div class="col-sm-4 col-sm-offset-2 form-left-align">
                                 <input id="tdap" type="checkbox" name="immunization[tdap]" value="true" onchange="show_sub(event)"> Tdap
@@ -336,7 +339,7 @@
                     </div>
                     <!-- Previous Screenings -->
                     <div class="form-group">
-                        <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check All Previous Screenings:</label></br>
+                        <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Check All Previous Screenings You Have Recieved:</label></br>
                         <div class="col-sm-12 col-no-margin">
                             <div class="col-sm-4 col-sm-offset-2 form-left-align">
                                 <input id="cholesterol_screening" type="checkbox" name="screening[cholesterol]" value="true" onchange="show_sub_screenings(event)"> Cholesterol
@@ -345,8 +348,8 @@
                                 <div class="col-sm-6 form-left-align">
                                     <div class="form-left-align">
                                         <label for="cholesterol_screening-result">Test Result: </label>
-                                        <input id="cholesterol_screening-yes" type="radio" name="basic[cholesterol_screening]" value="true"> Positive 
-                                        <input id="cholesterol_screening-no" type="radio" name="basic[cholesterol_screening]" value="false"> Negative 
+                                        <input id="cholesterol_screening-yes" type="radio" name="screening[cholesterol_result]" value="true"> Positive 
+                                        <input id="cholesterol_screening-no" type="radio" name="screening[cholesterol_result]" value="false"> Negative 
                                     </div>
                                 </div>
                             </div>  
@@ -374,8 +377,8 @@
                                 <div class="col-sm-6 form-left-align">
                                     <div class="form-left-align">
                                         <label for="mammogram_screening-result">Test Result: </label>
-                                        <input id="mammogram_screening-yes" type="radio" name="basic[mammogram_screening]" value="true"> Positive 
-                                        <input id="mammogram_screening-no" type="radio" name="basic[mammogram_screening]" value="false"> Negative 
+                                        <input id="mammogram_screening-yes" type="radio" name="screening[mammogram_result]" value="true"> Positive 
+                                        <input id="mammogram_screening-no" type="radio" name="screening[mammogram_result]" value="false"> Negative 
                                     </div>
                                 </div>
                             </div>                            
@@ -403,8 +406,8 @@
                                 <div class="col-sm-6 form-left-align">
                                     <div class="form-left-align">
                                         <label for="blood_in_stool_screening-result">Test Result: </label>
-                                        <input id="blood_in_stool_screening-yes" type="radio" name="basic[blood_in_stool_screening]" value="true"> Positive 
-                                        <input id="blood_in_stool_screening-no" type="radio" name="basic[blood_in_stool_screening]" value="false"> Negative 
+                                        <input id="blood_in_stool_screening-yes" type="radio" name="screening[blood_in_stool_result]" value="true"> Positive 
+                                        <input id="blood_in_stool_screening-no" type="radio" name="screening[blood_in_stool_result]" value="false"> Negative 
                                     </div>
                                 </div>
                             </div>  
@@ -432,8 +435,8 @@
                                 <div class="col-sm-6 form-left-align">
                                     <div class="form-left-align">
                                         <label for="hiv_screening-result">Test Result: </label>
-                                        <input id="hiv_screening-yes" type="radio" name="basic[hiv_screening]" value="true"> Positive 
-                                        <input id="hiv_screening-no" type="radio" name="basic[hiv_screening]" value="false"> Negative 
+                                        <input id="hiv_screening-yes" type="radio" name="screening[hiv_result]" value="true"> Positive 
+                                        <input id="hiv_screening-no" type="radio" name="screening[hiv_result]" value="false"> Negative 
                                     </div>
                                 </div>
                             </div>  
@@ -461,8 +464,8 @@
                                 <div class="col-sm-6 form-left-align">
                                     <div class="form-left-align">
                                         <label for="colonoscopy_screening-result">Test Result: </label>
-                                        <input id="colonoscopy_screening-yes" type="radio" name="basic[colonoscopy_screening]" value="true"> Positive 
-                                        <input id="colonoscopy_screening-no" type="radio" name="basic[colonoscopy_screening]" value="false"> Negative 
+                                        <input id="colonoscopy_screening-yes" type="radio" name="screening[colonoscopy_result]" value="true"> Positive 
+                                        <input id="colonoscopy_screening-no" type="radio" name="screening[colonoscopy_result]" value="false"> Negative 
                                     </div>
                                 </div>
                             </div>  
@@ -490,8 +493,8 @@
                                 <div class="col-sm-6 form-left-align">
                                     <div class="form-left-align">
                                         <label for="diabetes-result">Test Result: </label>
-                                        <input id="diabetes-yes" type="radio" name="basic[diabetes]" value="true"> Positive 
-                                        <input id="diabetes-no" type="radio" name="basic[diabetes]" value="false"> Negative 
+                                        <input id="diabetes-yes" type="radio" name="screening[diabetes_result]" value="true"> Positive 
+                                        <input id="diabetes-no" type="radio" name="screening[diabetes_result]" value="false"> Negative 
                                     </div>
                                 </div>
                             </div>                           
@@ -519,8 +522,8 @@
                                 <div class="col-sm-6 form-left-align">
                                     <div class="form-left-align">
                                         <label for="abdominal_aortic_aneurysm_screening-result">Test Result: </label>
-                                        <input id="abdominal_aortic_aneurysm_screening-yes" type="radio" name="basic[abdominal_aortic_aneurysm_screening]" value="true"> Positive 
-                                        <input id="abdominal_aortic_aneurysm_screening-no" type="radio" name="basic[abdominal_aortic_aneurysm_screening]" value="false"> Negative 
+                                        <input id="abdominal_aortic_aneurysm_screening-yes" type="radio" name="screening[abdominal_aortic_aneurysm_result]" value="true"> Positive 
+                                        <input id="abdominal_aortic_aneurysm_screening-no" type="radio" name="screening[abdominal_aortic_aneurysm_result]" value="false"> Negative 
                                     </div>
                                 </div>
                             </div>
@@ -548,8 +551,8 @@
                                 <div class="col-sm-6 form-left-align">
                                     <div class="form-left-align">
                                         <label for="hepatitis_c_screening-result">Test Result: </label>
-                                        <input id="hepatitis_c_screening-yes" type="radio" name="basic[hepatitis_c_screening]" value="true"> Positive 
-                                        <input id="hepatitis_c_screening-no" type="radio" name="basic[hepatitis_c_screening]" value="false"> Negative 
+                                        <input id="hepatitis_c_screening-yes" type="radio" name="screening[hepatitis_c_result]" value="true"> Positive 
+                                        <input id="hepatitis_c_screening-no" type="radio" name="screening[hepatitis_c_result]" value="false"> Negative 
                                     </div>
                                 </div>
                             </div>
@@ -569,8 +572,32 @@
                                 </div>
                             </div>
                         </div>
-
-
+                    </div>
+                    <!-- Other Medical Questions -->
+                    <div class="form-group form-group-short">
+                        <label for="prior_condition" class="col-sm-11 col-sm-offset-1 control-label sub-label">Please Answer Each Question Below:</label><br>
+                    </div>
+                    <!-- AIDS - personal -->
+                    <div class="form-group form-group-short">
+                        <div class="col-sm-4 right-align">Do you feel you are at risk for HIV/AIDS?</div>
+                        <div class="col-sm-7 form-left-align">
+                            <input id="personal_hiv_yes" type="radio" name="other[personal_hiv]" value="true">
+                            <label for="personal_hiv_yes">Yes</label>
+                            <br>
+                            <input id="personal_hiv_no" type="radio" name="other[personal_hiv]" value="false">
+                            <label for="personal_hiv_no">No</label>
+                        </div>
+                    </div>
+                    <!-- AIDS - partner -->
+                    <div class="form-group form-group-short">
+                        <div class="col-sm-4 right-align">Do you feel your partner is at risk for HIV/AIDS?</div>
+                        <div class="col-sm-7 form-left-align">
+                            <input id="partner_hiv_yes" type="radio" name="other[partner_hiv]" value="true">
+                            <label for="partner_hiv_yes">Yes</label>
+                            <br>
+                            <input id="partner_hiv_no" type="radio" name="other[partner_hiv]" value="false">
+                            <label for="partner_hiv_no">No</label>
+                        </div>
                     </div>
                 </div>
 

@@ -1,13 +1,12 @@
 <?php
-
 // $table_patient
 $table_patient = $_REQUEST['patient_table'];
+// $results_patient
+$results_patient = $_REQUEST['patient_summary'];
 // $table_payer
 $table_payer = $_REQUEST['payer_table'];
-// $final_value_patient 
-$final_value_patient = $_REQUEST['final_value_patient'];
-// $final_value_payer
-$final_value_payer = $_REQUEST['final_value_payer'];
+// $results_payer
+$results_payer = $_REQUEST['payer_summary'];
 // $risk_factors
 $risk_factors = $_REQUEST['risk_factors'];
 
@@ -15,7 +14,7 @@ $risk_factors = $_REQUEST['risk_factors'];
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>SNR DESIGN</title>
+    <title>MY PLAN</title>
     <link rel="shortcut icon" href="https://cdn1.iconfinder.com/data/icons/dental-2-1/90/89-128.png" type="image/x-icon" />
     <link rel="text/javascript" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
     <!-- bootstrap theme -->
@@ -42,19 +41,18 @@ $risk_factors = $_REQUEST['risk_factors'];
             <h2>Patient Health Optimized Perspective</h2>
         </div>
         <div class="panel-body results-text">
-            <div class="col-sm-offset-2">
-                <table border="1">
+            <div>
+                <table class="centerer" border="1">
                     <? foreach ($table_patient as $row_index => $row): ?>
                         <tr>
                             <? foreach ($row as $shit => $data) {
-                                // die(json_encode($row));
                                 if ($row_index == 0) { ?>
                                     <th>
                                         <?= $data ?>
                                     </th>
                                 <? } else { ?>
                                     <td>
-                                        <? if (is_string($data)) {
+                                        <? if (is_string($data) && $data != "0" && $data != "1") {
                                             echo $data;
                                         } else {
                                             if ($data == 0 ) {
@@ -71,7 +69,9 @@ $risk_factors = $_REQUEST['risk_factors'];
                 </table>
             </div>
             <br>
-            Total Quality Adjusted Life Years Gained: <?= $final_value_patient ?> Years
+            Total Quality Adjusted Life Years Gained: <b><?= $results_patient[1] ?> Years </b></br>
+            Total Cost of Proposed Plan: <b>$<?= number_format($results_patient[0]) ?></b></br>
+            Average Cost per Quality Adjusted Life Year: <b>$<?= number_format($results_patient[2]) ?></b>
         </div>
     </div>
 </div>
@@ -82,36 +82,39 @@ $risk_factors = $_REQUEST['risk_factors'];
             <h2>Society Optimized Perspective</h2>
         </div>
         <div class="panel-body results-text">
-            <div class="col-sm-offset-2">
-            <table border="1">
-                <? foreach ($table_payer as $row_index => $row): ?>
-                    <tr>
-                        <? foreach ($row as $shit => $data) {
-                            // die(json_encode($row));
-                            if ($row_index == 0) { ?>
-                                <th>
-                                    <?= $data ?>
-                                </th>
-                            <? } else { ?>
-                                <td>
-                                    <? if (is_string($data)) {
-                                        echo $data;
-                                    } else {
-                                        if ($data == 0 ) {
-                                            echo "-";
-                                        } else { ?>
-                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                        <? }
-                                    } ?>
-                                </td>
+            <div>
+                <table class="centerer" border="1">
+                    <? foreach ($table_payer as $row_index => $row): ?>
+                        <tr>
+                            <? foreach ($row as $shit => $data) {
+                                // die(json_encode($row));
+                                if ($row_index == 0) { ?>
+                                    <th>
+                                        <?= $data ?>
+                                    </th>
+                                <? } else {
+                                    ?>
+                                    <td>
+                                        <? if (is_string($data) && $data != "0" && $data != "1") {
+                                            echo $data;
+                                        } else {
+                                            if ($data == 0 ) {
+                                                echo "-";
+                                            } else { ?>
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                            <? }
+                                        } ?>
+                                    </td>
+                                <? } ?>
                             <? } ?>
-                        <? } ?>
-                    </tr>
-                <? endforeach; ?>
-            </table>
+                        </tr>
+                    <? endforeach; ?>
+                </table>
             </div>
             <br>
-            Cost Per Quality Adjusted Life Year Gained: $<?= $final_value_payer ?>
+            Total Quality Adjusted Life Years Gained: <b><?= $results_payer[1] ?> Years </b></br>
+            Total Cost of Proposed Plan: <b>$<?= number_format($results_payer[0]) ?></b></br>
+            Average Cost per Quality Adjusted Life Year: <b>$<?= number_format($results_payer[2]) ?></b>
         </div>
     </div>
 </div>

@@ -1,11 +1,11 @@
 <?php
-// TBD - how to put "doctor" recommended in here?
-function validate_glaucoma ($basic_answers) {
-    return "Glaucoma";
+
+function validate_pneumococcal ($basic_answers) {
+    return "Pneumococcal Vaccine";
 }
 
-function qaly_and_cost_per_qaly_glaucoma ($basic_answers) {
-    $id = 106;
+function qaly_and_cost_per_qaly_pneumococcal ($basic_answers) {
+    $id = 117;
 
     $sql = "SELECT cost, qaly, cpq FROM cpq_table WHERE get_id=" . $id;
 

@@ -1,69 +1,63 @@
 <?php
-// TBD
-function validate_cholesterol ($survey_answers) {
+// All Eligible
+function validate_cholesterol ($basic_answers) {
     return "Cholesterol";
 }
 
+// In progress
+function qaly_and_cost_per_qaly_cholesterol ($basic_answers) {
 
-//returns [$cost_per_qaly, $qaly] for AAA
-function qaly_and_cost_per_qaly_cholesterol ($survey_answers) {
-
-    if ($survey_answers['race'] == "white") {
-        if ($survey_answers['gender'] == "male") {
-            if ($survey_answers['age'] < 75) {
-                $cost_per_qaly = 40241.18;
-                $qaly = 0.00268;
+    if ($basic_answers['race'] == "white") {
+        if ($basic_answers['gender'] == "male") {
+            if ($basic_answers['age'] < 75) {
+                $id = 84;
             } else {
-                $cost_per_qaly = 10452.47;
-                $qaly = 0.0103;
+                $id = 85;
             }
         } else {
-            if ($survey_answers['age'] < 75) {
-                $cost_per_qaly = 46990.19;
-                $qaly = 0.0023;
+            if ($basic_answers['age'] < 75) {
+                $id = 86;
             } else {
-                $cost_per_qaly = 36887.37;
-                $qaly = 0.0029;
+                $id = 87;
             }
         }
-    } elseif ($survey_answers['race'] == "black") {
-        if ($survey_answers['gender'] == "male") {
-            if ($survey_answers['age'] < 75) {
-                $cost_per_qaly = 39516.67;
-                $qaly = 0.0027;
+    } elseif ($basic_answers['race'] == "black") {
+        if ($basic_answers['gender'] == "male") {
+            if ($basic_answers['age'] < 75) {
+                $id = 88;
             } else {
-                $cost_per_qaly = 8500;
-                $qaly = 0.0127;
+                $id = 89;
             }
         } else {
-            if ($survey_answers['age'] < 75) {
-                $cost_per_qaly = 47543.48;
-                $qaly = 0.00227;
-            } else {
-                $cost_per_qaly = 41566.66;
-                $qaly = 0.002598;
+            if ($basic_answers['age'] < 75) {
+                $id = 90;
+            } else {    
+                $id = 91;
             }
         }
-    } elseif ($survey_answers['race'] == "hispanic") {
-        if ($survey_answers['gender'] == "male") {
-            if ($survey_answers['age'] < 75) {
-                $cost_per_qaly = 41266;
-                $qaly = 0.0026;                
+    } elseif ($basic_answers['race'] == "hispanic") {
+        if ($basic_answers['gender'] == "male") {
+            if ($basic_answers['age'] < 75) {
+                $id = 92;               
             } else {
-                $cost_per_qaly = 2400;
-                $qaly = 0.045;
+                $id = 93;
             }
         } else {
-            if ($survey_answers['age'] < 75) {
-                $cost_per_qaly = 46250;
-                $qaly = 0.00233;
+            if ($basic_answers['age'] < 75) {
+                $id = 94;
             } else {
-                $cost_per_qaly = 38000;
-                $qaly = 0.00284;               
+                $id = 95;             
             }
         }
     }
 
-    $cost = 108;
+    $sql = "SELECT cost, qaly, cpq FROM cpq_table WHERE get_id=" . $id;
+
+    // TBD - test and extract each of the below
+
+    // $cost_per_qaly = 12144.81;
+    // $qaly = 0.024;
+    // $cost = 292.57;
+
     return [$cost_per_qaly, $qaly, $cost];
 }

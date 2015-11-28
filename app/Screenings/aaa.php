@@ -1,21 +1,24 @@
 <?php
 
-// using questions to determine if you are cms enabled
-function validate_aaa ($survey_answers) {
-    if ($survey_answers['male']) {
-        if ($survey_answers['smoker']) {
+function validate_aaa ($basic_answers) {
+    if ($basic_answers['gender'] == "male") {
+        if ($basic_answers['smoker']) {
             return "AAA"; //Should be the User ready name
         }
     }
     return false;
 }
 
+function qaly_and_cost_per_qaly_aaa ($basic_answers) {
+    $id = 80;
 
-//returns [$cost_per_qaly, $qaly] for AAA
-function qaly_and_cost_per_qaly_aaa ($survey_answers) {
-    $cost_per_qaly = 10631.03;
-    $qaly = 0.029;
-    $cost = 308.3;
+    $sql = "SELECT cost, qaly, cpq FROM cpq_table WHERE get_id=" . $id;
+
+    // TBD - test and extract each of the below
+
+    // $cost_per_qaly = 12144.81;
+    // $qaly = 0.024;
+    // $cost = 292.57;
 
     return [$cost_per_qaly, $qaly, $cost];
 }

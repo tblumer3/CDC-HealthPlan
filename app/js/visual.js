@@ -124,7 +124,7 @@ function check_required() {
         $("#final_required").show();
     }
 
-// for testing
+// for testing - TBD
 success = true;
 
     return success;

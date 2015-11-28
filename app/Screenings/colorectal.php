@@ -1,75 +1,52 @@
 <?php
-function validate_colorectal ($survey_answers) {
-    if ($survey_answers['age'] < 85) {
-        return "Colorectal";
+function validate_colorectal ($basic_answers, $prior_screenings) {
+    if ($basic_answers['age'] < 75) {
+        // Either never had, or had one >10 yrs and was negative
+        if (!$prior_screenings['colonoscopy'] || ($prior_screenings['colonoscopy'] && $prior_screenings['colonoscopy_years'] >= 10 && $prior_screenings['colonoscopy_result'] == "false")) {
+            return "Colorectal";
+        }
     }
     return false;
 }
-
-
-function qaly_and_cost_per_qaly_colorectal ($survey_answers) {
-    if ($survey_answers['race'] == "white") {
-        if ($survey_answers['gender'] == "female") {
-            if ($survey_answers['age'] < 70) {
-                $id = 11;
-            } 
-            if ($survey_answers['age'] < 75) {
-                $id = 12;
-            } 
-            if ($survey_answers['age'] < 80) {
-                $id = 13;
-
-            } 
-            if ($survey_answers['age'] < 85) {
-                $id = 14;
+// TBD - the spreadsheet numbers are wrong for colorectal
+function qaly_and_cost_per_qaly_colorectal ($basic_answers) {
+    if ($basic_answers['race'] == "white") {
+        if ($basic_answers['gender'] == "female") {
+            if ($basic_answers['age'] < 70) {
+                $id = 96;
+            } else {
+                $id = 97;
             }
         } else {
-            if ($survey_answers['age'] < 70) {
-                $id = 16;
-            } 
-            if ($survey_answers['age'] < 75) {
-                $id = 17;
-            } 
-            if ($survey_answers['age'] < 80) {
-                $id = 18;
-            } 
-            if ($survey_answers['age'] < 85) {
-                $id = 19;
+            if ($basic_answers['age'] < 70) {
+                $id = 98;
+            } else {
+                $id = 99;
             }
         }
-    } elseif ($survey_answers['race'] == "black") {
-        if ($survey_answers['gender'] == "female") {
-            if ($survey_answers['age'] < 70) {
-                $id = 21;
-            } 
-            if ($survey_answers['age'] < 75) {
-                $id = 22;
-            } 
-            if ($survey_answers['age'] < 80) {
-                $id = 23;
-
-            } 
-            if ($survey_answers['age'] < 85) {
-                $id = 24;
+    } elseif ($basic_answers['race'] == "black") {
+        if ($basic_answers['gender'] == "female") {
+            if ($basic_answers['age'] < 70) {
+                $id = 100;
+            } else {
+                $id = 101;
             }
         } else {
-            if ($survey_answers['age'] < 70) {
-                $id = 26;
-            } 
-            if ($survey_answers['age'] < 75) {
-                $id = 27;
-            } 
-            if ($survey_answers['age'] < 80) {
-                $id = 28;
-            } 
-            if ($survey_answers['age'] < 85) {
-                $id = 29;
+            if ($basic_answers['age'] < 70) {
+                $id = 102;
+            } else {
+                $id = 103;
             }
         }
     }
+
     $sql = "SELECT cost, qaly, cpq FROM cpq_table WHERE get_id=" . $id;
 
-    //TBD - run and spitout sql results
+    // TBD - test and extract each of the below
+
+    // $cost_per_qaly = 12144.81;
+    // $qaly = 0.024;
+    // $cost = 292.57;
 
     return [$cost_per_qaly, $qaly, $cost];
 }

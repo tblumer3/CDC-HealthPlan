@@ -1,13 +1,12 @@
 <?php
 
-function risk_factor_builder($answers) {
+function risk_factor_builder($basic_answers, $prior_diagnosis) {
     $risk_factors = [];
-    $basic_answers = $answers['basic'];
 
     //tbd - make sure these match the input
-    $diabetes = $answers['prior']['diabetes'];
-    $hypertension = $answers['prior']['high_blood_pressure'];
-    $cholesterol = $answers['prior']['high_cholesterol'];
+    $diabetes = $prior_diagnosis['diabetes'];
+    $hypertension = $prior_diagnosis['high_blood_pressure'];
+    $cholesterol = $prior_diagnosis['high_cholesterol'];
     $obese = $basic_answers['obese'];
 
     //each screening
@@ -24,13 +23,13 @@ function risk_factor_builder($answers) {
     }
 
     echo "cholesterol risk";
-    $cholesterol = cholesterol($answers, $hypertension, $obese, $diabetes);
+    $cholesterol = cholesterol($basic_answers, $hypertension, $obese, $diabetes);
     if ($cholesterol) {
         $risk_factors[] = $cholesterol;
     }
 
     echo "hypertension risk";
-    $hypertension = hypertension($answers, $cholesterol, $diabetes, $obese);
+    $hypertension = hypertension($basic_answers, $cholesterol, $diabetes, $obese);
     if ($hypertension) {
         $risk_factors[] = $hypertension;
     }

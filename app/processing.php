@@ -1,25 +1,26 @@
 <?php
-
-
-die(json_encode($_REQUEST));
+require_once "../app" . "/processing_helpers.php";
 
 
 // Testing
 $screenings = ["Aspirin Use", "Breast Cancer", "Diabetes", "Hepatitis C"];
 
-$costs_array_payer = [90000, 980, 15000, 1000000];
-$costs_array_patient = [1.02, .08, .25, .09]; 
+$costs_per_qaly_array = [90000, 980, 15000, 1000000];
+$qaly_array = [1.02, 0.08, 0.25, 0.09];
+$cost_array = [88235, 78.4, 3750, 90000];
 
-$results_patient = [0,1,1,0,1,1,0,0,0,1,1,0,0,1,0,1,0,1,1,0];
-$results_payer = [1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,1,0,1,0];
+$optimization_payer_result = [0,1,1,0,1,1,0,0,0,1,1,0,0,1,0,1,0,1,1,0];
+$optimization_patient_result = [1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,1,0,1,0];
+
+$big_N = 10;
 
 // includes treatment name as first entry in each row
-$table_patient = convert_array($screenings, $results_patient);
-$table_payer = convert_array($screenings, $results_payer);
+$table_patient = convert_array($screenings, $optimization_patient_result, "patient", $qaly_array);
+$table_payer = convert_array($screenings, $optimization_payer_result, "payer", $costs_per_qaly_array);
 
-$final_value_patient = 2.4;
-$final_value_payer = 25000;
-
+// Get summary stats
+$patient_summary_results = summary_calculator($optimization_patient_result, $cost_array, $qaly_array, $costs_per_qaly_array, $big_N);
+$payer_summary_results = summary_calculator($optimization_payer_result, $cost_array, $qaly_array, $costs_per_qaly_array, $big_N);
 //Mock risk_factor and risk
 $condition = "Osteoporosis";
 $impactful_sub_pops = ["female", "white"];
@@ -28,30 +29,15 @@ $graph_image_name = "ost.jpeg";
 $risk = ['condition' => $condition, 'sub_pops' => $impactful_sub_pops, 'graph' => $graph_image_name];
 $risk_factors = [$risk];
 
-
-function convert_array($screenings, $results) {
-    $final_output = [];
-    $final_output[0] = ["Screening Name", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5"];
-    foreach ($screenings as $index => $screening_name) {
-        $row = [$screening_name];
-        foreach ($results as $res_index => $binary) {
-            if ($res_index%sizeof($screenings) == $index) {
-                $row[]=$binary;
-            }
-        }
-        $final_output[]= $row;
-    }
-    return $final_output;
-}
 // end Testing
 
 
 // Final Results Compilation:
 $results = [];
-$results['table_patient'] = $table_patient;
-$results['table_payer'] = $table_payer;
-$results['final_value_patient'] = $final_value_patient;
-$results['final_value_payer'] = $final_value_payer;
+$results['patient_table'] = $table_patient;
+$results['patient_summary'] = $patient_summary_results;
+$results['payer_table'] = $table_payer;
+$results['payer_summary'] = $payer_summary_results;
 $results['risk_factors'] = $risk_factors;
 
 

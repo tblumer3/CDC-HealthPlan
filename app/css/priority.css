@@ -3,6 +3,18 @@
   border-color: black;
 }
 
+.centerer {
+    margin: 0 auto;
+}
+
+th {
+    text-align: center;
+}
+
+.right-align {
+    text-align: right;
+}
+
 .results-text {
     font-size: 1.5em;
 }
