@@ -2,22 +2,22 @@
 // TBD - remove logging
 
 // TBD - remove test data below
-$screenings = ["AAA", "Aspirin", "Breast Cancer", "Alcohol Misuse"];
-$numbers = [1000,1200,1500,900];
-$perspective = "payer";
-$big_N = 10;
+// $screenings = ["AAA", "Aspirin", "Breast Cancer", "Alcohol Misuse"];
+// $numbers = [1000,1200,1500,900];
+// $perspective = "payer";
+// $big_N = 10;
 
-// TBD - remove test call below
-optimization_builder($screenings, $numbers, $perspective, $big_N);
+// // TBD - remove test call below
+// optimization_builder($screenings, $numbers, $perspective, $big_N);
 
 function optimization_builder($screenings, $numbers, $perspective, $big_N) {
     // Objective function
     $number_of_columns = sizeof($numbers)*5;
 
     // Declare Model
-    
     $lp = lpsolve('make_lp', 0, $number_of_columns);
     echo "Model Declaration ";
+    
     // Objective Function - Final
     objective_function_builder($numbers, $perspective, $lp);
 
@@ -50,7 +50,8 @@ function optimization_builder($screenings, $numbers, $perspective, $big_N) {
     // print_r(lpsolve('get_constraints', $lp));
     lpsolve('delete_lp', $lp);
     
-    die("fuck");
+
+    return $variables[0];
 }
 
 function objective_function_builder($numbers, $perspective, $lp) {
@@ -123,7 +124,6 @@ function column_limits($screenings, $big_N, $lp) {
     }
 }
 
-//need to intigrate past screening data (through $prior_screenings answers)
 function row_limits($screenings, $lp) {
     $frequency_list = ["AAA" => 10, "Alcohol Misuse" => 2, "Aspirin" => 1, "Breast Cancer" => 1, "Cholesterol" => 5, "Colorectal" => 10, "Depression" => 1, "Diabetes" => 1, "Influenze" => 1, "Glaucoma" => 1, "Hepatitis C" => 10, "HIV/AIDS" => 5, "Lung Cancer" => 1, "Osteoporosis" => 2, "Pneumococcal Vaccine" => 10, "Tobacco Cessation Therapy" => 2];
     $number_of_screenings = sizeof($screenings);
@@ -250,7 +250,4 @@ function zero_constraints_generator($number_of_screenings) {
     
     return $zero_array;
 }
-
-
-optimization_builder($screenings, $numbers, $perspective, $big_N, $prior_screenings);
 

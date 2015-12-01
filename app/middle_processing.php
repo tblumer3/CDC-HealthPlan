@@ -4,6 +4,7 @@
 require_once "../app" . "/processing_helpers.php";
 require_once "../app" . "/screening_qaly_builder.php";
 require_once "../app" . "/risk_factor_builder.php";
+require_once "../app" . "/optimization_builder.php";
 
 // Using Processing Helpers
 // Processing of Basic Info - Used to Select Cost and QALY
@@ -28,11 +29,11 @@ $cost_per_qaly_array = $screening_results[1];
 $qaly_array = $screening_results[2];
 $cost_array = $screening_results[3];
 
+die(json_encode($valid_screening_array) . "////" . json_encode($cost_per_qaly_array));
+
 // 
 // Done above this line
-// 
-
-
+//
 
 // Run Optimizations - TBD - optimization builder is not valid
 $optimization_payer_result = optimization_builder($valid_screening_array, $cost_per_qaly_array, "payer", $big_N);
