@@ -35,8 +35,8 @@ $cost_array = $screening_results[3];
 
 
 // Run Optimizations - TBD - optimization builder is not valid
-$optimization_payer_result = optimization_builder($valid_screening_array, $cost_per_qaly_array, "payer", $big_N, $prior_screenings);
-$optimization_patient_result = optimization_builder($valid_screening_array, $qaly_array, "patient", $big_N, $prior_screenings);
+$optimization_payer_result = optimization_builder($valid_screening_array, $cost_per_qaly_array, "payer", $big_N);
+$optimization_patient_result = optimization_builder($valid_screening_array, $qaly_array, "patient", $big_N);
 
 
 

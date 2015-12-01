@@ -43,34 +43,33 @@ $risk_factors = $_REQUEST['risk_factors'];
         <div class="panel-body results-text">
             <div>
                 <table class="centerer" border="1">
-                    <? foreach ($table_patient as $row_index => $row): ?>
+                    <?php foreach ($table_patient as $row_index => $row): ?>
                         <tr>
-                            <? foreach ($row as $shit => $data) {
+                            <?php foreach ($row as $shit => $data) {
                                 if ($row_index == 0) { ?>
                                     <th>
                                         <?= $data ?>
                                     </th>
-                                <? } else { ?>
+                                <?php } else { ?>
                                     <td>
-                                        <? if (is_string($data) && $data != "0" && $data != "1") {
+                                        <?php if (is_string($data) && $data != "0" && $data != "1") {
                                             echo $data;
                                         } else {
                                             if ($data == 0 ) {
                                                 echo "-";
                                             } else { ?>
                                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                            <? }
+                                            <?php }
                                         } ?>
                                     </td>
-                                <? } ?>
-                            <? } ?>
+                                <?php } ?>
+                            <?php } ?>
                         </tr>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </table>
             </div>
             <br>
             Total Quality Adjusted Life Years Gained: <b><?= $results_patient[1] ?> Years </b></br>
-            Total Cost of Proposed Plan: <b>$<?= number_format($results_patient[0]) ?></b></br>
             Average Cost per Quality Adjusted Life Year: <b>$<?= number_format($results_patient[2]) ?></b>
         </div>
     </div>
@@ -84,36 +83,35 @@ $risk_factors = $_REQUEST['risk_factors'];
         <div class="panel-body results-text">
             <div>
                 <table class="centerer" border="1">
-                    <? foreach ($table_payer as $row_index => $row): ?>
+                    <?php foreach ($table_payer as $row_index => $row): ?>
                         <tr>
-                            <? foreach ($row as $shit => $data) {
+                            <?php foreach ($row as $shit => $data) {
                                 // die(json_encode($row));
                                 if ($row_index == 0) { ?>
                                     <th>
                                         <?= $data ?>
                                     </th>
-                                <? } else {
+                                <?php } else {
                                     ?>
                                     <td>
-                                        <? if (is_string($data) && $data != "0" && $data != "1") {
+                                        <?php if (is_string($data) && $data != "0" && $data != "1") {
                                             echo $data;
                                         } else {
                                             if ($data == 0 ) {
                                                 echo "-";
                                             } else { ?>
                                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                            <? }
+                                            <?php }
                                         } ?>
                                     </td>
-                                <? } ?>
-                            <? } ?>
+                                <?php } ?>
+                            <?php } ?>
                         </tr>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </table>
             </div>
             <br>
             Total Quality Adjusted Life Years Gained: <b><?= $results_payer[1] ?> Years </b></br>
-            Total Cost of Proposed Plan: <b>$<?= number_format($results_payer[0]) ?></b></br>
             Average Cost per Quality Adjusted Life Year: <b>$<?= number_format($results_payer[2]) ?></b>
         </div>
     </div>
@@ -130,7 +128,7 @@ $risk_factors = $_REQUEST['risk_factors'];
                 <div class="col-sm-6 results-text">
                     You are at increased risk for <span class="condition_name"><?= $risk['condition'] ?></span><br>
                     Contributing Risk Factors Include: 
-                    <? for ($i=0; $i < sizeof($risk['sub_pops']); $i++) {
+                    <?php for ($i=0; $i < sizeof($risk['sub_pops']); $i++) {
                         echo $risk['sub_pops'][$i];
                         if ($i != (sizeof($risk['sub_pops'])-1)) {
                             echo ", ";
@@ -144,14 +142,3 @@ $risk_factors = $_REQUEST['risk_factors'];
         <?php endforeach; ?>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-

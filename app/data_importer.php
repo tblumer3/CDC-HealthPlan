@@ -1,5 +1,7 @@
 <?php
 
+// To be used in command-line only!
+
 $handle = fopen("data_import.csv", "r");
 
 if ($handle) {
@@ -13,8 +15,6 @@ if ($handle) {
         $cost = intval($row[2]);
         $qaly = floatval($row[3]); // decimal stuff
         $cpq = intval($row[4]);
-
-        die($cpq . " //// " . $qaly . " /// " . $cost . " //// " . $get_id);
 
         $sql = "INSERT INTO cpq_table (screening_name, cost, qaly, cpq, get_id) VALUES (\"$screening_name\", $cost, $qaly, $cpq, $get_id)";
     }
