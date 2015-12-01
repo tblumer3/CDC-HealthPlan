@@ -1,6 +1,4 @@
 <?php
-
-//TBD - make sure all the screenings are included
 require_once "../app" . '/Screenings/aaa.php';
 require_once "../app" . '/Screenings/alcohol_misuse.php';
 require_once "../app" . '/Screenings/aspirin.php';
@@ -17,8 +15,13 @@ require_once "../app" . '/Screenings/lung_cancer.php';
 require_once "../app" . '/Screenings/osteoporosis.php';
 require_once "../app" . '/Screenings/pneumococcal.php';
 require_once "../app" . '/Screenings/tobacco_cessation.php';
+require_once "../app" . '/Screenings/data_file.php';
+require_once "../app" . '/data_importer.php';
 
 function screening_qaly_builder ($basic_answers, $prior_immunizations, $prior_screenings, $prior_diagnosis, $other_questions) {
+    $big_var = importer();
+    $_ENV['big'] = $big_var;
+
     $valid_screening_array = [];
     $cost_per_qaly_array = [];
     $qaly_array = [];

@@ -3,7 +3,6 @@
 function risk_factor_builder($basic_answers, $prior_diagnosis) {
     $risk_factors = [];
 
-    //tbd - make sure these match the input
     $diabetes = $prior_diagnosis['diabetes'];
     $hypertension = $prior_diagnosis['high_blood_pressure'];
     $cholesterol = $prior_diagnosis['high_cholesterol'];
@@ -42,7 +41,7 @@ function osteoporosis($answers) {
     $gender = $answers['gender'];
     $age = intval($answers['age']);
     $race = $answers['race'];
-    $graph = "img_loc"; // TBD
+    $graph = "ost.jpeg"; // TBD
     $risk = ['condition' => "Osteoporosis", 'graph' => $graph, 'sub_pops' => []];
 
     if ($gender == 'female') {
@@ -63,7 +62,7 @@ function osteoporosis($answers) {
 
 function diabetes($answers, $cholesterol, $hypertension, $obese) {
     $race = $answers['race'];
-    $graph = "img_loc"; // TBD
+    $graph = "diabetes.jpeg"; // TBD
     $risk = ['condition' => "Diabetes", 'graph' => $graph, 'sub_pops' => []];
 
     if ($cholesterol) {
@@ -86,7 +85,7 @@ function diabetes($answers, $cholesterol, $hypertension, $obese) {
 }
 
 function cholesterol($answers, $hypertension, $obese, $diabetes) {
-    $graph = "img_loc"; // TBD
+    $graph = "cholesterol.jpeg"; // TBD
     $risk = ['condition' => "Cholesterol", 'graph' => $graph, 'sub_pops' => []];
 
     if ($diabetes) {
@@ -107,7 +106,7 @@ function cholesterol($answers, $hypertension, $obese, $diabetes) {
 
 function hypertension($answers, $cholesterol, $diabetes, $obese) {
     $race = $answers['race'];
-    $graph = "img_loc"; // TBD
+    $graph = "bp.jpeg"; // TBD
     $risk = ['condition' => "Hypertension (High Blood Pressure)", 'graph' => $graph, 'sub_pops' => []];
 
     if ($cholesterol) {

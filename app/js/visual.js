@@ -119,13 +119,9 @@ function check_required() {
         success = false;
     }
     
-
     if (!success) {
         $("#final_required").show();
     }
-
-// for testing - TBD
-success = true;
 
     return success;
 }
@@ -210,7 +206,6 @@ function alcohol_checker() {
 }
 
 function prior_medical_information_checker() {
-    // TBD
     return true;
 }
 

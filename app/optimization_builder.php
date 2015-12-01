@@ -1,14 +1,4 @@
 <?php
-// TBD - remove logging
-
-// TBD - remove test data below
-// $screenings = ["AAA", "Aspirin", "Breast Cancer", "Alcohol Misuse"];
-// $numbers = [1000,1200,1500,900];
-// $perspective = "payer";
-// $big_N = 10;
-
-// // TBD - remove test call below
-// optimization_builder($screenings, $numbers, $perspective, $big_N);
 
 function optimization_builder($screenings, $numbers, $perspective, $big_N) {
     // Objective function
@@ -16,47 +6,33 @@ function optimization_builder($screenings, $numbers, $perspective, $big_N) {
 
     // Declare Model
     $lp = lpsolve('make_lp', 0, $number_of_columns);
-    echo "Model Declaration ";
-    
     // Objective Function - Final
     objective_function_builder($numbers, $perspective, $lp);
 
     // Binary Constraints - Final
     binary_constraint_builder($screenings, $lp);
 
-    // for constraint visualization
-    ?>
-    </br>
-    <?php
-
     // column limits - Final
     column_limits($screenings, $big_N, $lp);
-    echo "|| Column limits complete ";
 
 
     // row limits - Final
     row_limits($screenings, $lp);
-    echo "|| Row limits complete ";
 
     // total limit - Final
     total_n_limit($screenings, $big_N, $lp);
-    echo "|| Total limit complete ";
 
-    print lpsolve('solve', $lp) . "\n"; // - Solves the LP
-    print lpsolve('get_objective', $lp) . "\n";
-    print_r(lpsolve('get_variables', $lp));
+    lpsolve('solve', $lp);
 
     $variables = lpsolve('get_variables', $lp);
     // print_r(lpsolve('get_constraints', $lp));
     lpsolve('delete_lp', $lp);
-    
 
     return $variables[0];
 }
 
 function objective_function_builder($numbers, $perspective, $lp) {
     if ($perspective == "payer") {
-        echo "PAYER PERSPECTIVE";
         lpsolve('set_minim', $lp);
         $max_min = "Minimum";
     } else {
@@ -70,13 +46,6 @@ function objective_function_builder($numbers, $perspective, $lp) {
     }
 
     $return = lpsolve('set_obj_fn', $lp, $objective_array);
-
-    if ($return) {
-        echo "|| Set objective function ";
-    } else {
-        echo "|| failed to set objective function ";
-        die();
-    }
 }
 
 function binary_constraint_builder($screenings, $lp) {
@@ -91,12 +60,6 @@ function binary_constraint_builder($screenings, $lp) {
         $zero_array[$i] = 1;
         $success = lpsolve('set_binary',$lp, $zero_array);
 
-    }
-
-    if ($success) {
-        echo "|| added binary vars ";
-    } else {
-        echo "|| failed to set bin vars ";
     }
 }
 
@@ -115,15 +78,10 @@ function column_limits($screenings, $big_N, $lp) {
         }
 
         $result = lpsolve('add_constraint', $lp, $zero_array, LE, $column_max_count);
-        if (!$result) {
-            echo "|| column limit failure ";
-        }
-
-        // local logging - TBD - remove
-        log_constraint($zero_array, "LOE", $column_max_count, "Column " . $n . " max screenings constraint");
     }
 }
 
+//need to intigrate past screening data (through $prior_screenings answers)
 function row_limits($screenings, $lp) {
     $frequency_list = ["AAA" => 10, "Alcohol Misuse" => 2, "Aspirin" => 1, "Breast Cancer" => 1, "Cholesterol" => 5, "Colorectal" => 10, "Depression" => 1, "Diabetes" => 1, "Influenze" => 1, "Glaucoma" => 1, "Hepatitis C" => 10, "HIV/AIDS" => 5, "Lung Cancer" => 1, "Osteoporosis" => 2, "Pneumococcal Vaccine" => 10, "Tobacco Cessation Therapy" => 2];
     $number_of_screenings = sizeof($screenings);
@@ -143,12 +101,6 @@ function total_n_limit($screenings, $big_N, $lp) {
     }
 
     $result = lpsolve('add_constraint', $lp, $zero_array, EQ, $big_N);
-    if (!$result) {
-        echo "|| total screening limit failure ";
-    }
-
-    // local logging - TBD - remove
-    log_constraint($zero_array, "EQ", $big_N, "Total N limit");  
 }
 
 function standard_frequency_constraints($freq, $index, $name, $lp, $number_of_screenings) {
@@ -166,10 +118,6 @@ function standard_frequency_constraints($freq, $index, $name, $lp, $number_of_sc
                 $zero_array[$var2] = 1;
 
                 $result = lpsolve('add_constraint', $lp, $zero_array, LE, 1);
-                if (!$result) {
-                    echo "|| row limit failure ";
-                }
-                log_constraint($zero_array, "LOE", 1, $name . " frequency limit - 2 years");
 
             }
             break;
@@ -186,10 +134,6 @@ function standard_frequency_constraints($freq, $index, $name, $lp, $number_of_sc
                 $zero_array[$var3] = 1;
 
                 $result = lpsolve('add_constraint', $lp, $zero_array, LE, 1);
-                if (!$result) {
-                    echo "|| row limit failure ";
-                }  
-                log_constraint($zero_array, "LOE", 1, $name . " frequency limit - 3 years");
 
             }
             break;
@@ -202,10 +146,6 @@ function standard_frequency_constraints($freq, $index, $name, $lp, $number_of_sc
             }
 
             $result = lpsolve('add_constraint', $lp, $zero_array, LE, 1);
-            if (!$result) {
-                echo "|| row limit failure ";
-            }
-            log_constraint($zero_array, "LOE", 1, $name . " frequency limit - 5 years");
             
             break;
         default:
@@ -217,26 +157,8 @@ function standard_frequency_constraints($freq, $index, $name, $lp, $number_of_sc
             }
 
             $result = lpsolve('add_constraint', $lp, $zero_array, LE, 1);
-            if (!$result) {
-                echo "|| row limit failure ";
-            }
-            log_constraint($zero_array, "LOE", 1, $name . " frequency limit - 10 years / Once Only");
             break;
     }
-}
-function log_constraint($args, $sign, $value, $description) {
-    $output = "";
-    $string_args = json_encode($args);
-
-    $output .= $description;
-    $output .= "; " . $sign;
-    $output .= "; " . $value;
-    $output .= "; - " . $string_args . "\n";
-
-    echo $output;
-    ?>
-    </br>
-    <?php
 }
 
 //returns the full array of all possible screening years, zero'd
@@ -250,4 +172,3 @@ function zero_constraints_generator($number_of_screenings) {
     
     return $zero_array;
 }
-

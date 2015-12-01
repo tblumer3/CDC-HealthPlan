@@ -1,7 +1,9 @@
 <?php
 // all eligible
 function validate_osteoporosis ($basic_answers) {
-    return "Osteoporosis";
+    if ($basic_answers['race'] && $basic_answers['race'] != "other") {
+        return "Osteoporosis";
+    }
 }
 
 function qaly_and_cost_per_qaly_osteoporosis ($basic_answers) {
@@ -137,11 +139,6 @@ function qaly_and_cost_per_qaly_osteoporosis ($basic_answers) {
 
     $sql = "SELECT cost, qaly, cpq FROM cpq_table WHERE get_id=" . $id;
 
-    // TBD - test and extract each of the below
-
-    // $cost_per_qaly = 12144.81;
-    // $qaly = 0.024;
-    // $cost = 292.57;
-
-    return [$cost_per_qaly, $qaly, $cost];
+    $data = fetch($id);
+    return $data;
 }
