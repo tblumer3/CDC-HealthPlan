@@ -57,6 +57,7 @@ $payer_summary_results = summary_calculator($optimization_payer_result, $cost_ar
 $table_payer = convert_array($valid_screening_array, $optimization_payer_result, "payer", $cost_per_qaly_array);
 $table_patient = convert_array($valid_screening_array, $optimization_patient_result, "patient", $qaly_array);
 
+// die(json_encode($table_patient));
 // die(json_encode($table_payer));
 // Run Risk Factor Builder
 $risk_factors = risk_factor_builder($basic_answers, $prior_diagnosis);
@@ -102,7 +103,6 @@ $results_payer = $payer_summary_results;
                     <?php foreach ($table_patient as $row_index => $row): ?>
                         <tr>
                             <?php foreach ($row as $shit => $data) {
-
                                 if ($row_index == 0) { ?>
                                     <th>
                                         <?= $data ?>
@@ -143,7 +143,6 @@ $results_payer = $payer_summary_results;
                     <?php foreach ($table_payer as $row_index => $row): ?>
                         <tr>
                             <?php foreach ($row as $shit => $data) {
-                                // die(json_encode($row));
                                 if ($row_index == 0) { ?>
                                     <th>
                                         <?= $data ?>

@@ -117,7 +117,7 @@ function convert_array($screenings, $results, $type, $numbers) {
         $row[] = $numbers[$index];
         foreach ($results as $res_index => $binary) {
             if ($res_index%sizeof($screenings) == $index) {
-                $row[]=intval($binary);
+                $row[]=round($binary);
             }
         }
         $final_output[]= $row;
